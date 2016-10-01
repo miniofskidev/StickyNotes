@@ -26,6 +26,8 @@ public class NoteModel {
         this.note = note;
     }
 
+    public void colors(){
 
+    }
 
 }
