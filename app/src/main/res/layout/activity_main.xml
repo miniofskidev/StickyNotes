@@ -22,6 +22,7 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/submit"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:textAllCaps="false"
@@ -29,6 +30,7 @@
             android:text="submit" />
 
         <EditText
+            android:id="@+id/textField"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingRight="10dp"

@@ -7,6 +7,7 @@ public class NoteModel {
 
     String note;
 
+
     public int getId() {
         return id;
     }
