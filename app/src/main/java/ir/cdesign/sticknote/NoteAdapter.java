@@ -55,10 +55,21 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.Holder> {
             textView = (TextView) itemView.findViewById(R.id.note_text);
         }
 
-        public void setData(NoteModel current, int position) {
+        public void setData(final NoteModel current, final int position) {
             this.current = current;
             this.position = position;
             textView.setText(current.getNote());
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    DatabaseHandler dh = new DatabaseHandler(context);
+                    dh.deleteContact(current);
+                    notes.remove(position);
+                    notifyItemRemoved(position);
+                    notifyDataSetChanged();
+                    return false;
+                }
+            });
         }
     }
 

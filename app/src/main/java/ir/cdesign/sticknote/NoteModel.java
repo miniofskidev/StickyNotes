@@ -6,7 +6,16 @@ package ir.cdesign.sticknote;
 public class NoteModel {
 
     String note;
+    int id;
 
+    public NoteModel(){
+
+    }
+
+    public NoteModel(int id, String note) {
+        this.id = id ;
+        this.note = note ;
+    }
 
     public int getId() {
         return id;
@@ -16,7 +25,6 @@ public class NoteModel {
         this.id = id;
     }
 
-    int id;
 
     public String getNote() {
         return note;
@@ -25,9 +33,4 @@ public class NoteModel {
     public void setNote(String note) {
         this.note = note;
     }
-
-    public void colors(){
-
-    }
-
 }

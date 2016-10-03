@@ -28,9 +28,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
 
+    Context context;
+
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
+
 
     // Creating Tables
     @Override
@@ -61,6 +65,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Inserting Row
         db.insert(TABLE_CONTACTS, null, values);
         db.close(); // Closing database connection
+    }
+
+    public void deleteContact(NoteModel note) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_CONTACTS, KEY_ID + " = ?",
+                new String[] { String.valueOf(note.getId()) });
+        db.close();
+    }
+
+    // Getting single contact
+    public NoteModel getContact(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_ID,
+                        KEY_NAME }, KEY_ID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        NoteModel note = new NoteModel(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1));
+        // return contact
+        return note;
     }
 
     // Getting All Contacts
