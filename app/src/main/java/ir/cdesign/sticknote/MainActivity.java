@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -15,15 +16,17 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    RecyclerView recyclerView;
+    RecyclerView noteView;
     List<NoteModel> notes;
     DatabaseHandler databaseHandler;
     NoteAdapter adapter;
 
-    Button submit;
+    Button submit , colorPanleButton;
     EditText textField;
 
     String text;
+
+    ColorPanelHandle panel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         init();
 
         setRecycler();
+
+        panel = new ColorPanelHandle(this);
+//        panel.openPanel();
     }
 
     @Override
@@ -48,26 +54,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textField.setText("");
                 databaseHandler.addContact(noteModel);
                 notes = databaseHandler.getAllContacts();
-                recyclerView.setAdapter(new NoteAdapter(this ,notes));
+                noteView.setAdapter(new NoteAdapter(this ,notes));
                 hideKeyBoard();
+                break;
+            case R.id.colorPanelButton:
+                Log.d("amin","color panel clicked ");
+                panel.openPanel();
                 break;
         }
     }
 
     private void init(){
         submit = (Button) findViewById(R.id.submit);
+        colorPanleButton= (Button) findViewById(R.id.colorPanelButton);
         textField = (EditText) findViewById(R.id.textField);
 
         submit.setOnClickListener(this);
+        colorPanleButton.setOnClickListener(this);
     }
 
     private void setRecycler(){
-        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        noteView = (RecyclerView) findViewById(R.id.recycler);
         notes = databaseHandler.getAllContacts();
         adapter = new NoteAdapter(this,notes);
         GridLayoutManager glm = new GridLayoutManager(this,3);
-        recyclerView.setLayoutManager(glm);
-        recyclerView.setAdapter(adapter);
+        noteView.setLayoutManager(glm);
+        noteView.setAdapter(adapter);
     }
 
     private void hideKeyBoard(){

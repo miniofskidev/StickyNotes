@@ -14,7 +14,7 @@
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="45dp"/>
+            android:layout_marginBottom="45dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +23,8 @@
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="20dp"
+                android:id="@+id/colorPanelButton"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:background="@color/colorRed" />
 
@@ -51,12 +52,19 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/colorPanel"
+    <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:background="@color/colorText"
-        android:layout_height="180dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="-180dp"/>
+        android:layout_height="150dp"
+        android:layout_marginBottom="-150dp"
+        android:layout_gravity="bottom">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/colorPanel"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/colorText" />
+
+    </LinearLayout>
 
 </FrameLayout>
